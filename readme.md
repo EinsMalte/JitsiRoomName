@@ -1,14 +1,1 @@
-<html> 
-  <head> 
-    <script src="jquery.js"></script> 
-    <script> 
-    $(function(){
-      $("#includedContent").load("Web/index.html"); 
-    });
-    </script> 
-  </head> 
-
-  <body> 
-     <div id="includedContent"></div>
-  </body> 
-</html>
+https://htmlpreview.github.io/?https://github.com/EinsMalte/JitsiRoomName/blob/master/Web/index.html
