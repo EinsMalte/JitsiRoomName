@@ -2,8 +2,8 @@
 
 
 <h1 id='name'>Name:</h1>
-<h2 id='passwort'>Passwort:</h1>
-<button onclick="generate()">Generieren</button><br>
+<h2>Passwort:</h2><h2 id='passwort'></h2>
+<button onclick="generate()">Generieren</button><button onclick="use()">Passwort kopieren und den Jitsiraum öffnen</button><br>
 <h3>Läge des Namen: </h6><input type="number" id='NL' name="NL">
 <br>
 <h3>Läge des Passworts: </h6><input type="number" id='PL' name="PL">
@@ -67,9 +67,34 @@
 				trys--;
 				lastcharakter = characters.charAt(getRandomInt(characters.length-1))
 			}
-			Passwort.innerHTML = "Passwort: " + generatedPassword+lastcharakter;
+			Passwort.innerHTML = "" + generatedPassword+lastcharakter;
 		}
 		
 		
 	}, 25);
+	
+	function use() {
+
+	  copyStringToClipboard(generatedPassword);
+	  
+	  
+	  window.open('https://meet.jit.si/' + generatedName);
+	}
+	
+	function copyStringToClipboard (str) {
+		// Temporäres Element erzeugen
+	   var el = document.createElement('textarea');
+	   // Den zu kopierenden String dem Element zuweisen
+	   el.value = str;
+	   // Element nicht editierbar setzen und aus dem Fenster schieben
+	   el.setAttribute('readonly', '');
+	   el.style = {position: 'absolute', left: '-9999px'};
+	   document.body.appendChild(el);
+	   // Text innerhalb des Elements auswählen
+	   el.select();
+	   // Ausgewählten Text in die Zwischenablage kopieren
+	   document.execCommand('copy');
+	   // Temporäres Element löschen
+	   document.body.removeChild(el);
+	}
 </script>
