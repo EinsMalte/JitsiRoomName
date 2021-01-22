@@ -8,35 +8,68 @@
 <br>
 <h3>Läge des Passworts: </h6><input type="number" id='PL' name="PL">
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-
+	let Name = document.getElementById('name');
+	let Passwort = document.getElementById('passwort');
+	let name_to_go = 0;
+	let password_to_go = 0;
+	let generatedName = "";
+	let generatedPassword = "";
 	document.getElementById('NL').value = 15;
 	document.getElementById('PL').value = 25;
+	
+	let characters = "AaBbcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz123456789!!§$%&/()=";
+	
+	let lastcharakter = '';
+	let trys = 3;
 	function generate() {
-		let Name = document.getElementById('name');
-		let Passwort = document.getElementById('passwort');
 		
-		let generatedName = "";
-		let generatedPassword = "";
-		let characters = "AaBbcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz123456789!!§$%&/()=";
+		
+		generatedName = "";
+		generatedPassword = "";
+
 		
 		let Namelength = document.getElementById('NL').value;
 		
-		for(let i = 0; i < Namelength; i++) {
-			generatedName = generatedName + characters.charAt(getRandomInt(characters.length-1));
-		}
+
 		
 		let Passwordlength = document.getElementById('PL').value;
-		for(let i = 0; i < Passwordlength; i++) {
-			generatedPassword = generatedPassword + characters.charAt(getRandomInt(characters.length-1));
-		}
+		name_to_go = Namelength;
+		password_to_go = Passwordlength;
 		
-		
-		Name.innerHTML = "Name: " + generatedName;
-		Passwort.innerHTML = "Passwort: " + generatedPassword;
+
 	}
 	
 	function getRandomInt(max) {
 		return Math.floor(Math.random() * Math.floor(max));
 	}
+	
+	setInterval(function(){ 
+		if(name_to_go > 0) {
+			if(trys == 0) {
+				generatedName = generatedName + lastcharakter;
+				name_to_go--;
+				trys = 5;
+				lastcharakter = '';
+			} else {
+				trys--;
+				lastcharakter = characters.charAt(getRandomInt(characters.length-1))
+			}
+			Name.innerHTML = "Name: " + generatedName + lastcharakter;
+		} else if(password_to_go > 0) {
+			if(trys == 0) {
+				generatedPassword = generatedPassword + lastcharakter;
+				password_to_go--;
+				trys = 5;
+				lastcharakter = '';
+			} else {
+				trys--;
+				lastcharakter = characters.charAt(getRandomInt(characters.length-1))
+			}
+			Passwort.innerHTML = "Passwort: " + generatedPassword+lastcharakter;
+		}
+		
+		
+	}, 25);
 </script>

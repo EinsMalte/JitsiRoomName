@@ -1,0 +1,44 @@
+<script src='https://meet.jit.si/external_api.js'></script>
+
+<script>
+
+
+	let Name = document.getElementById('name');
+	let Passwort = document.getElementById('passwort');
+	
+	let generatedName = "";
+	let generatedPassword = "";
+	let characters = "AaBbcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz123456789!!§$%&/()=";
+	
+	let Namelength = 15;
+	
+	for(let i = 0; i < Namelength; i++) {
+		generatedName = generatedName + characters.charAt(getRandomInt(characters.length-1));
+	}
+	
+	let Passwordlength = 25;
+	for(let i = 0; i < Passwordlength; i++) {
+		generatedPassword = generatedPassword + characters.charAt(getRandomInt(characters.length-1));
+	}
+	const domain = 'meet.jit.si';
+	const options = {
+
+		roomName: generatedName,
+	};
+	const api = new JitsiMeetExternalAPI(domain, options);
+
+	api.addEventListener('participantRoleChanged', function(event) {
+		if (event.role === "moderator") {
+			api.executeCommand('password', generatedPassword);
+		}
+	});
+	// join a protected channel
+	api.on('passwordRequired', function ()
+	{
+		api.executeCommand('password', generatedPassword);
+	});
+	
+	function getRandomInt(max) {
+		return Math.floor(Math.random() * Math.floor(max));
+	}
+</script>
