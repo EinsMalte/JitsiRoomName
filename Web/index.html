@@ -1,0 +1,42 @@
+
+
+
+<h1 id='name'>Name:</h1>
+<h2 id='passwort'>Passwort:</h1>
+<button onclick="generate()">Generieren</button><br>
+<h3>Läge des Namen: </h6><input type="number" id='NL' name="NL">
+<br>
+<h3>Läge des Passworts: </h6><input type="number" id='PL' name="PL">
+
+<script>
+
+	document.getElementById('NL').value = 15;
+	document.getElementById('PL').value = 25;
+	function generate() {
+		let Name = document.getElementById('name');
+		let Passwort = document.getElementById('passwort');
+		
+		let generatedName = "";
+		let generatedPassword = "";
+		let characters = "AaBbcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz123456789!!§$%&/()=";
+		
+		let Namelength = document.getElementById('NL').value;
+		
+		for(let i = 0; i < Namelength; i++) {
+			generatedName = generatedName + characters.charAt(getRandomInt(characters.length-1));
+		}
+		
+		let Passwordlength = document.getElementById('NL').value;
+		for(let i = 0; i < Passwordlength; i++) {
+			generatedPassword = generatedPassword + characters.charAt(getRandomInt(characters.length-1));
+		}
+		
+		
+		Name.innerHTML = "Name: " + generatedName;
+		Passwort.innerHTML = "Passwort: " + generatedPassword;
+	}
+	
+	function getRandomInt(max) {
+		return Math.floor(Math.random() * Math.floor(max));
+	}
+</script>
